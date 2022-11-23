@@ -8,81 +8,87 @@
 #include<sched.h>
 
 void *countA() {
-    struct sched_param *param;
+    struct sched_param param;
 
-    struct timespec *start;
-    struct timespec *end;
+    struct timespec start;
+    struct timespec end;
 
-    int val = pthread_setschedparam(thread_self(), SCHED_OTHER, &param);
+    param.sched_priority = 0;
+
+    int val = pthread_setschedparam(pthread_self(), SCHED_OTHER, &param);
     
     int timeEnd;
     int timeStart;
     if (val == 0) {
         int count;
-        int max = pow(2, 32);
+        long long int max = pow(2, 32);
         timeStart = clock_gettime(CLOCK_REALTIME, &start);
-        for (int i = 1; i <= max; i++) {
+        for (long long int i = 1; i <= max; i++) {
             count++;
         }
         timeEnd = clock_gettime(CLOCK_REALTIME, &end);
     } else {
-        printf("Error!!");
+        printf("Error!! \n");
     }
 
-    int timeDiff = timeEnd - timeStart;
-    printf(&timeDiff);
+    int timeDiff = end.tv_nsec - start.tv_nsec;
+    printf("%d \n", timeDiff);
 }
 
 void *countB() {
-    struct sched_param *param;
+    struct sched_param param;
 
-    struct timespec *start;
-    struct timespec *end;
+    struct timespec start;
+    struct timespec end;
 
-    int val = pthread_setschedparam(thread_self(), SCHED_RR, &param);
+    param.sched_priority = 1;
+
+    int val = pthread_setschedparam(pthread_self(), SCHED_RR, &param);
 
     int timeEnd;
     int timeStart;
     if (val == 0) {
         int count;
-        int max = pow(2, 32);
+        long long int max = pow(2, 32);
         timeStart = clock_gettime(CLOCK_REALTIME, &start);
-        for (int i = 1; i < max; i++) {
+        for (long long int i = 1; i < max; i++) {
             count++;
         }
         timeEnd = clock_gettime(CLOCK_REALTIME, &end);
     } else {
-        printf("Error!!");
+        printf("Error!! \n");
     }
 
-    int timeDiff = timeEnd - timeStart;
-    printf(&timeDiff);
+    int timeDiff = end.tv_nsec - start.tv_nsec;
+    printf("%d \n", timeDiff);
 }
 
 void *countC() {
-    struct sched_param *param;
+    struct sched_param param;
 
-    struct timespec *start;
-    struct timespec *end;
+    struct timespec start;
+    struct timespec end;
 
-    int val = pthread_setschedparam(thread_self(), SCHED_FIFO, &param);
+    param.sched_priority = 1;
+
+    int val = pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
 
     int timeEnd;
     int timeStart;
     if (val == 0) {
         int count;
-        int max = pow(2, 32);
+        long long int max = pow(2, 32);
         timeStart = clock_gettime(CLOCK_REALTIME, &start);
-        for (int i = 1; i < max; i++) {
+        for (long long int i = 1; i < max; i++) {
             count++;
         }
         timeEnd = clock_gettime(CLOCK_REALTIME, &end);
     } else {
-        printf("Error!!");
+        printf("Error!! \n");
     }
 
-    int timeDiff = timeEnd - timeStart;
-    printf(&timeDiff);
+    int timeDiff = end.tv_nsec - start.tv_nsec;
+    printf("%d \n", timeDiff);
 }
 
 int main() {
