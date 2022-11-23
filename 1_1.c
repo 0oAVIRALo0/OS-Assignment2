@@ -31,7 +31,7 @@ void *countA() {
         printf("Error!! \n");
     }
 
-    int timeDiff = end.tv_nsec - start.tv_nsec;
+    int timeDiff = end.tv_sec - start.tv_sec;
     printf("%d \n", timeDiff);
 }
 
@@ -59,7 +59,7 @@ void *countB() {
         printf("Error!! \n");
     }
 
-    int timeDiff = end.tv_nsec - start.tv_nsec;
+    int timeDiff = end.tv_sec - start.tv_sec;
     printf("%d \n", timeDiff);
 }
 
@@ -87,7 +87,7 @@ void *countC() {
         printf("Error!! \n");
     }
 
-    int timeDiff = end.tv_nsec - start.tv_nsec;
+    int timeDiff = end.tv_sec - start.tv_sec;
     printf("%d \n", timeDiff);
 }
 
